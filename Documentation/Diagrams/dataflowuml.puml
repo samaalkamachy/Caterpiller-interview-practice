@@ -1,0 +1,12 @@
+@startuml Data Flow
+title MFSD Data Flow Diagram
+
+actor "Temperature Sensor" as Sensor
+actor "Operator" as Operator
+
+rectangle "Mine Fleet Sensor Data API" as API
+
+Sensor --> API : Temperature Reading (JSON / REST)
+API --> Operator : Alert Notification
+
+@enduml

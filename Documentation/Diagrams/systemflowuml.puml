@@ -1,0 +1,19 @@
+@startuml System Flow
+title MFSD System Flow Diagram
+
+actor "Temperature Sensor" as Sensor
+actor "Operator" as Operator
+
+rectangle "Controller\n(REST Endpoint)" as Controller
+rectangle "Service\n(Business Logic)" as Service
+rectangle "Repository\n(Data Access Layer)" as Repository
+database "Database\n(Temperature Readings)" as DB
+
+Sensor --> Controller : Sends temperature data
+Controller --> Service : Calls
+Service --> Repository : Persists data
+Repository --> DB : Stores readings
+Service --> Controller : Returns result / triggers alert
+Controller --> Operator : Alert / Response
+
+@enduml
