@@ -19,6 +19,7 @@ public class TemperatureService {
     }
 
     public TemperatureModel getLatestTemperature(String sensorId) {
+        // Retrieve the latest temperature reading for the specified sensor ID from the repository
         return repository.findLatestBySensorId(sensorId);
     }
 

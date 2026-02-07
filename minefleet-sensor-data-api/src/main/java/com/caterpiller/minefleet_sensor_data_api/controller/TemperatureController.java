@@ -19,11 +19,27 @@ public class TemperatureController {
 
     @PostMapping
     public ResponseEntity<?> submitTemperature(@RequestBody TemperatureModel temperatureModel) {
+        // Process the incoming temperature data through the service layer which handles validation and storage
         try {
             temperatureService.processTemperature(temperatureModel);
             return ResponseEntity.status(201).body(Map.of("message", "Temperature data submitted successfully"));
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(Map.of("error", ex.getMessage()));
         }
+    }
+
+    @GetMapping("/{id}/latest")
+    public ResponseEntity<?> getLatestTemperature(@PathVariable String id) {
+        // Retrieve the latest temperature through the service layer which interacts with the repository
+        var reading = temperatureService.getLatestTemperature(id);
+
+        if (reading == null) {
+            // return a 404 if no data is found for the given sensor ID
+            return ResponseEntity
+                    .status(404)
+                    .body(Map.of("error", "No sensor data found"));
+        }
+
+        return ResponseEntity.ok(reading);
     }
 }
