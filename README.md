@@ -1,2 +1,19 @@
-# Caterpiller-interview-practice
-Project to build a tool to demonstrate my java and business analytical skills to the company as well as touch up and remember technical skills. 
+# Mine Fleet Sensor Data API
+
+## Overview
+Spring Boot REST API for ingesting and retrieving temperature sensor data
+from mining equipment.
+
+## Endpoints
+POST /sensors  
+GET /sensors/{id}/latest
+
+## Run Application
+mvn spring-boot:run
+
+## Run Tests
+mvn test
+
+## Architecture
+Controller → Service → Repository → Model  
+In-memory storage using ConcurrentHashMap
